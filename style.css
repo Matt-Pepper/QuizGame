@@ -24,7 +24,11 @@
 }
 
 .wrong {
-    background-color: red;
+    color: red;
+}
+
+.correct {
+    color: green;
 }
 
 #correct {

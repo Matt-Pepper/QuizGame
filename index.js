@@ -57,10 +57,14 @@ getQuiz();
 const getAnswer = (question, element) => {
 	if (element.innerHTML === question.correct) {
 		correctP.innerHTML = `${question.correct} was the correct answer!`;
+		correctP.classList.add("correct");
+		correctP.classList.remove("wrong");
 		score[0]++;
 		score[1]++;
 	} else {
 		correctP.innerHTML = `The correct answer was: ${question.correct}`;
+		correctP.classList.add("wrong");
+		correctP.classList.remove("correct");
 		score[1]++;
 	}
 	removeFunctions();

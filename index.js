@@ -30,61 +30,52 @@ const fillQuiz = (obj) => {
 const nextQuestion = () => {
 	const question = questions.shift();
 	const answers = [question.correct, ...question.wrong].sort();
-	quiz.querySelector(".question").innerHTML = `Question ${score[1] + 1}: <br/> ${question.question}`;
+	quiz.querySelector(".question").innerHTML = `Question ${score[1] + 1}: <br/> ${
+		question.question
+	}`;
 	quiz.querySelector(".difficulty").innerHTML = `Difficulty: ${question.difficulty}`;
 	quiz.querySelector(".answer__one").innerHTML = answers[0];
 	quiz.querySelector(".answer__two").innerHTML = answers[1];
 	quiz.querySelector(".answer__three").innerHTML = answers[2];
 	quiz.querySelector(".answer__four").innerHTML = answers[3];
-    document.getElementById("score").innerHTML = `Your score is ${score[0]} out of ${score[1]}`;
+	document.getElementById("score").innerHTML = `Your score is ${score[0]} out of ${score[1]}`;
 
 	applyFunctionsToButtons(question, answers);
 };
 
 const applyFunctionsToButtons = (question) => {
 	const buttons = document.querySelectorAll(".answer");
-	//for (const button of buttons) {
-	//buttonFunctions.push(() => getAnswer(Object.keys(buttons).find(key => buttons[key] === button)))
-	//}
 	for (let i = 0; i < buttons.length; i++) {
-        buttonFunctions.push(() => getAnswer(question, buttons[i]));
-        buttons[i].addEventListener("click", buttonFunctions[i]);
-
-    }
+		buttonFunctions.push(() => getAnswer(question, buttons[i]));
+		buttons[i].addEventListener("click", buttonFunctions[i]);
+	}
 	buttons[0];
-
-	console.log(buttonFunctions);
 };
 
 getQuiz();
 
 const getAnswer = (question, element) => {
 	if (element.innerHTML === question.correct) {
-		//alert("correct");
-        console.log("correct");
-        correctP.innerHTML = `${question.correct} was the correct answer!`;
-        score[0]++;
-        score[1]++;
+		correctP.innerHTML = `${question.correct} was the correct answer!`;
+		score[0]++;
+		score[1]++;
 	} else {
-        //alert("wrong");
-        correctP.innerHTML = `The correct answer was: ${question.correct}`;
-        console.log("wrong");
-        score[1]++;
-	} 
-    removeFunctions();
-    if (questions.length) {
-        nextQuestion();
-    } else {
-        getQuiz();
-    }
+		correctP.innerHTML = `The correct answer was: ${question.correct}`;
+		score[1]++;
+	}
+	removeFunctions();
+	if (questions.length) {
+		nextQuestion();
+	} else {
+		getQuiz();
+	}
 };
 
 const removeFunctions = () => {
-    const buttons = document.querySelectorAll(".answer");
-    while (buttonFunctions.length > 0) {
-        for (const button of buttons) {
-            button.removeEventListener("click", buttonFunctions.shift());
-        }
-    }
-    
-}
+	const buttons = document.querySelectorAll(".answer");
+	while (buttonFunctions.length > 0) {
+		for (const button of buttons) {
+			button.removeEventListener("click", buttonFunctions.shift());
+		}
+	}
+};
